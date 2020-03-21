@@ -1,0 +1,43 @@
+<div class="panel panel-inverse">
+    <div class="panel-heading">Appointment List</div>
+    <div class="panel-body">
+        <div>
+            <button type="button" ui-sref="^.detail({id: null})" class="btn btn-success btn-sm">Create Appointment</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date/Time</th>
+                        <th>Address ID</th>
+                        <th>Teleconference Info</th>
+                        <th>Participant Usernames</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in $ctrl.appointmentEventsList">
+                        <td>{{item.title}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.addressId}}</td>
+                        <td>{{item.teleconferenceInfo}}</td>
+                        <th>
+                            <div ng-repeat="username in item.usernames track by $index">
+                                <p>{{username}}</p>
+                            </div>
+                        </th>
+                        <td>{{item.description}}</td>
+                        <td>
+                            <div class="btn-group" style="display: flex">
+                                <button class="btn btn-default btn-sm" type="button" ui-sref="^.detail({id: item._id})">Edit</button>
+                                <button class="btn btn-danger btn-sm" type="button" ng-click="$ctrl.delete(item._id)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

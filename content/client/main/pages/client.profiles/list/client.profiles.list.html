@@ -1,0 +1,39 @@
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h2 class="panel-title">Client Profile List</h2>
+    </div>
+    <div class="panel-body">
+        <button class="btn btn-success" ui-sref="main.clientProfiles.create({ id: null })">Create Profile</button>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Biography</th>
+                        <th>Reason For Joining</th>
+                        <th>Gender</th>
+                        <th>Who Referred You?</th>
+                        <th>Referral Sources</th>
+                        <th>User Id</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="profile in $ctrl.formData">
+                        <td>{{profile.bio}}</td>
+                        <td>{{profile.reason}}</td>
+                        <td>{{profile.gender}}</td>
+                        <td>{{profile.referralDescription}}</td>
+                        <td>{{profile.referralSource}}</td>
+                        <td>{{profile._id}}</td>
+                        <td class="pull-left">
+                            <input type="button" class="btn btn-danger pull-right" value="Delete" ng-click="$ctrl.delete(profile._id, $index)" />
+                            <input type="button" value="Edit" class="btn btn-default pull-right" ng-click="$ctrl.edit(profile._id)" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

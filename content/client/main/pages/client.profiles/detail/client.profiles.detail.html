@@ -1,0 +1,100 @@
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Client Profile Details</h4>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" name="$ctrl.form" ng-submit="$ctrl.validationForm()" novalidate>
+            <div class="container-fluid">
+                <div class="form-group" ng-class="{'has-error': $ctrl.validation('bio'),'has-feedback': $ctrl.validation('bio')}">
+                    <label class="control-label" for="bio" name="bio">Bio</label>
+                    <textarea required maxlength="700" rows="5" type="text" placeholder="Enter Your Biography" class="form-control" name="bio"
+                        id="bio" ng-model="$ctrl.formData.bio"></textarea>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.validationMessage('bio')"></span>
+                    <span class="control-label" ng-show="$ctrl.validationMessage('bio')">Field must contain your Bio information and be below 700 characters.</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validation('reason'),'has-feedback': $ctrl.validation('reason')}">
+                    <label name="reason" for="reason" class="control-label">Reason For Joining</label>
+                    <textarea required maxlength="500" name="reason" rows="4" type="text" class="form-control" id="reason" placeholder="Enter Reason For Joining"
+                        ng-model="$ctrl.formData.reason"></textarea>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.validation('reason')"></span>
+                    <span class="control-label" ng-show="$ctrl.validation('reason')">Field must contain your Reason For Joining information and be below 500 characters.</span>
+                </div>
+                <div class="form-group" ng-init="$ctrl.formData.gender = 'm'" ng-class="{'has-error': $ctrl.validation('gender'),'has-feedback': $ctrl.validation('gender')}">
+                    <label for="gender" class="control-label">Gender</label>
+                    <div class="radio radio-css radio-inline radio-inverse">
+                        <input name="gender" value="m" type="radio" ng-model="$ctrl.formData.gender" id="radio_inline_css_1" />
+                        <label name="gender" for="radio_inline_css_1">
+                            <span class="control-label">Male</span>
+                        </label>
+                    </div>
+                    <div class="radio radio-css radio-inline radio-inverse">
+                        <input name="gender" value="f" type="radio" ng-model="$ctrl.formData.gender" id="radio_inline_css_2" />
+                        <label name="gender" for="radio_inline_css_2">
+                            <span class="control-label">Female</span>
+                        </label>
+                    </div>
+                    <div class="radio radio-css radio-inline radio-inverse">
+                        <input name="radioOther" type="radio" value="o" ng-model="$ctrl.formData.gender" id="radio_inline_css_3">
+                        <label name="gender" for="radio_inline_css_3">
+                            <span class="control-label">Other</span>
+                        </label>
+                    </div>
+                    <input maxlength="20" type="text" class="form-control" name="gender" value="Other" ng-model="$ctrl.formData.genderOther"
+                        placeholder="Specify other gender" ng-model-options="modelOptions" ng-disabled="$ctrl.formData.gender != 'o'">
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.validation('gender')"></span>
+                    <span class="control-label" ng-show="$ctrl.validation('gender')">Please specify gender.</span>
+                </div>
+                <div class="form-group">
+                    <label for="referred">Who referred you? (Optional)</label>
+                    <input maxlength="200" type="text" name="referred" placeholder="Who Referred You" class="form-control" ng-model="$ctrl.formData.referralDescription"
+                    />
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validation('sources'),'has-feedback': $ctrl.validation('sources')}">
+                    <label name="sources" for="sources" class="control-label">Referral Source</label>
+                    <select required class="form-control" name="sources" ng-model="$ctrl.formData.referralSource">
+                        <option value="">Please Select One</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Therapist">Therapist</option>
+                        <option value="WebSearch">Web Search</option>
+                        <option value="Doctor">Doctor</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.validation('sources')"></span>
+                    <span class="control-label" ng-show="$ctrl.validation('sources')">Please choose one or more referral sources.</span>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="visible" class="js-switch ng-untouched ng-valid ng-isolate-scope ng-dirty ng-valid-parse ng-empty"
+                        ui-switch="{color: '#00acac', secondaryColor: '#C9C9C9'}" name="visible" ng-model="$ctrl.formData.isBioPublic"
+                        data-switchery="true" style="display: none;">
+                    <label for="visible">Would you like your bio to be public?</label>
+                    <p ng-show="$ctrl.form.formData.visible.$error" class="ng-hide"></p>
+                </div>
+                <div class="form-group" ng-show="$ctrl.formData.isBioPublic == false">
+                    <label class="control-label">Viewers</label>
+                    <ui-select name="username" close-on-select="false" ng-model="$ctrl.formData.bioViewerIds" theme="bootstrap" title="Choose a Supporters"
+                        multiple>
+                        <ui-select-match placeholder="Select or search a supporter in the list...">{{$item.username}} </ui-select-match>
+                        <ui-select-choices repeat="type._id as type in $ctrl.dropdownArray | filter: {username: $select.search}" group-by="'userType'">
+                            <div ng-bind-html="type.username"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validation('agreesToTerms'),'has-feedback': $ctrl.validation('agreesToTerms')}">
+                    <div class="checkbox checkbox-css checkbox-inline checkbox-inverse">
+                        <input required name="agreesToTerms" type="checkbox" ng-model="$ctrl.formData.agreesToTerms" id="inline_css_checkbox_1" />
+                        <label name="agreesToTerms" for="inline_css_checkbox_1">
+                            <span class="control-label">Agrees To Terms</span>
+                        </label>
+                        <div>
+                            <span class="control-label" ng-show="$ctrl.validation('agreesToTerms')">Please agree to terms before proceeding.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-9">
+                <button type="submit" value="Save" ng-model="button" class="btn btn-success">{{$ctrl.button}}</button>
+                <button type="button" class="btn btn-default" ui-sref="main.clientProfiles.list">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

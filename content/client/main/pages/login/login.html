@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-sm-offset-4 col-sm-4">
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-3">
+            <div class="panel-heading">
+                <h4 class="panel-title">Login</h4>
+            </div>
+            <div class="panel-body">
+                <form name="$ctrl.loginForm" novalidate>
+                    <fieldset>
+                        <div class="row form-horizontal">
+                            <div class="col-sm-12">
+                                <div ng-class="{ 'has-error': $ctrl.loginForm.$submitted }" class="form-group has-feedback">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">Username:</label>
+                                        <input name="username" ng-model="$ctrl.formData.username" type="text" class="form-control" required>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Error messages -->
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <p ng-show="$ctrl.loginForm.$submitted && $ctrl.loginForm.username.$error.required" class="control-label help-block text-left"><strong>This field is required</strong></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Feedback icon -->
+                                        <span ng-show="$ctrl.loginForm.$submitted" class="fa fa-times form-control-feedback"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-horizontal">
+                            <div class="col-sm-12">
+                                <div ng-class="{ 'has-error': $ctrl.loginForm.$submitted }" class="form-group has-feedback">
+                                    <div class="col-sm-12">
+                                        <label class="control-label">Password</label>
+                                        <input name="password" ng-model="$ctrl.formData.password" type="password" class="form-control" ng-pattern="/^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{6,24}$/" required>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Error messages -->
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <!-- NOTE: Only show this message if user tries to submit and request fails -->
+                                                        <p ng-show="$ctrl.loginForm.$submitted && $ctrl.loginFailFlag && (!$ctrl.loginForm.password.$error.required && !$ctrl.loginForm.password.$error.pattern)" class="control-label help-block text-left"><strong>Username or password doesn't match</strong></p>
+                                                        <p ng-show="$ctrl.loginForm.$submitted && $ctrl.loginForm.password.$error.pattern" class="control-label help-block text-left"><strong>Password needs to be between 6-24 characters</strong></p>
+                                                        <p ng-show="$ctrl.loginForm.$submitted && $ctrl.loginForm.password.$error.pattern" class="control-label help-block text-left"><strong>Must contain only letters and numbers</strong></p>
+                                                        <p ng-show="$ctrl.loginForm.$submitted && $ctrl.loginForm.password.$error.pattern" class="control-label help-block text-left"><strong>Must have at least 1 capital letter and number</strong></p>
+                                                        <p ng-show="$ctrl.loginForm.$submitted && $ctrl.loginForm.password.$error.required" class="control-label help-block text-left"><strong>This field is required</strong></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Feedback icon -->
+                                        <span ng-show="$ctrl.loginForm.$submitted" class="fa fa-times form-control-feedback"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" ng-click="$ctrl.login()" class="btn btn-success">Login</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <!-- end panel body -->
+        </div>
+
+    </div>
+</div>

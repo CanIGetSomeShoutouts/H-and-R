@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <h4 class="panel-title">All Trauma Types</h4>
+            </div>
+            <div class="panel-body">
+                <button class="btn btn-success m-b-10" ui-sref="^.details({id: ''})">Create</button>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Summary</th>
+                                <th>Draft</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="traumaType in $ctrl.traumaTypes">
+                                <td>{{traumaType.name}}</td>
+                                <td>{{traumaType.summary}}</td>
+                                <td>{{traumaType.isDraft?'True':'False'}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <!-- ui-sref allows us to link states -->
+                                        <!-- UI routers link to a state, not a URL. -->
+                                        <button type="button" ng-click="$ctrl.delete(traumaType._id)" class="btn btn-danger">Delete</button>
+                                        <button type="button" ui-sref="^.details({id: traumaType._id})" class="btn btn-default">Edit</button> {{traumaType.actions}}
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

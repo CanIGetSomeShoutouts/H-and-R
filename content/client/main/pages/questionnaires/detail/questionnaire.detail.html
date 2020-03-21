@@ -1,0 +1,103 @@
+<div class="panel panel-inverse" data-sortable-id="form-stuff-3">
+    <div class="panel-heading">
+        <h4 class="panel-title">Questionnaire Form</h4>
+    </div>
+    <div class="panel-body">
+        <form name="$ctrl.questionnairesForm" novalidate>
+            <fieldset>
+                <div class="form-group" ng-class="{'has-error': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm.name.$error.required, 'has-feedback': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm.name.$error.required}">
+                    <label class="control-label" for="Questionnaire Name">Questionnaire Name</label>
+                    <input type="text" maxlength="75" class="form-control" placeholder="Questionnaire Name" ng-model="$ctrl.questionnairesData.name"
+                        name="name" required>
+                    <span class="fa fa-times form-control-feedback"></span>
+                    <p class="help-block" ng-show="$ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm.name.$error.required">You must enter a questionnaire name</p>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm.description.$error.required, 'has-feedback': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm.description.$error.required}">
+                    <label class="control-label" for="Description">Description</label>
+                    <textarea type="text" maxlength="500" class="form-control" placeholder="Description" ng-model="$ctrl.questionnairesData.description"
+                        name="description" required></textarea>
+                    <span class="fa fa-times form-control-feedback"></span>
+                    <p class="help-block" ng-show="$ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm.description.$error.required">You must enter a description</p>
+                </div>
+
+                <div class="form-group">
+                    <label class='control-label' for="traumaType">Trauma Types</label>
+                    <ui-select multiple ng-model="$ctrl.questionnairesData.traumaTypeIds" theme="bootstrap" close-on-select="false" name="traumaType" id="traumaType">
+                        <ui-select-match placeholder="Select one or more">{{ $item.name }}</ui-select-match>
+                        <ui-select-choices repeat="traumaType._id as traumaType in $ctrl.traumaTypes | filter: {name: $select.search}"> {{ traumaType.name }}</ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group" ng-hide="$ctrl.isDraft">
+                    <div>
+                        <div class="checkbox checkbox-css checkbox-inline checkbox-inverse">
+                            <input type="checkbox" value="" id="inline_css_checkbox_1" checked="" ng-model="$ctrl.questionnairesData.isDraft">
+                            <label for="inline_css_checkbox_1" class="m-t-5">
+                                Save as Draft
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-repeat="question in $ctrl.questionnairesData.questions">
+                    <legend>Question {{$index + 1}}</legend>
+                    <p class="pull-right" class="pull-right" ng-show="$ctrl.questionnairesData.isDraft == true">Question
+                        <i class="fa fa-lg fa-minus-square m-r-5" ng-click="$ctrl.removeQuestionBtn($index)"></i>
+                    </p>
+                    <div class="form-group" ng-class="{'has-error': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['prompt'+ $index].$invalid, 'has-feedback':$ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['prompt'+ $index].$invalid}">
+                        <label class="control-label" for="Question" class="control-label">Prompt</label>
+                        <input type="text" maxlength="150" class="form-control" placeholder="Prompt" ng-model="$ctrl.questionnairesData.questions[$index].prompt"
+                            name="prompt{{$index}}" required>
+                        <span class="fa fa-times form-control-feedback"></span>
+                        <p class="help-block" ng-show="$ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['prompt'+$index].$error.required">You must enter a prompt</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Description" class="control-label">Description</label>
+                        <textarea type="text" maxlength="500" class="form-control" placeholder="Description (Optional)" ng-model="$ctrl.questionnairesData.questions[$index].description"
+                            name="description{{$index}}"></textarea>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['type'+ $index].$error.required, 'has-feedback': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['type'+ $index].$error.required}">
+                        <label class="control-label" for="Type" class="control-label">Answer Type</label>
+                        <select name="type{{$index}}" class="form-control" ng-model="$ctrl.questionnairesData.questions[$index].type" ng-options="type.value as type.name for type in $ctrl.types"
+                            required>
+                        </select>
+                        <span class="fa fa-times form-control-feedback"></span>
+                        <p class="help-block" ng-show="$ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['type'+$index].$error.required">You must select a type </p>
+                    </div>
+                    <div ng-show="$ctrl.questionnairesData.questions[$index].type == 'single' || $ctrl.questionnairesData.questions[$index].type == 'multiple'">
+                        <div class="form-group" ng-repeat="answer in question.answers track by $index" ng-class="{'has-error': $ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['answers'+ $parent.$index + '-' + $index].$error.required, 'has-feedback':$ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['answers'+ $parent.$index + '-' + $index].$error.required}">
+                            <label class="control-label" for="Answer">Answer {{$index + 1}}</label>
+                            <p class="pull-right" ng-show="$ctrl.questionnairesData.isDraft == true">Answer {{$index + 1}}
+                                <i class="fa fa-lg fa-minus-square m-r-5" ng-click="$ctrl.questionnairesForm.$submitted && $ctrl.removeAnswerBtn($parent.$index,$index)"></i>
+                            </p>
+                            <input type="text" class="form-control" placeholder="Answer" ng-model="question.answers[$index]" name="answers{{$parent.$index}}-{{$index}}"
+                                required>
+                            <span class="fa fa-times form-control-feedback"></span>
+                            <p class="help-block" ng-show="$ctrl.questionnairesForm.$submitted && $ctrl.questionnairesForm['answers'+ $parent.$index + '-'+ $index].$error.required">You must enter an answer</p>
+                        </div>
+                    </div>
+                    <p class="form-group" ng-show="$ctrl.questionnairesData.isDraft == true">
+                        <p class="pull-right" ng-show="$ctrl.questionnairesData.questions[$index].type == 'single' || $ctrl.questionnairesData.questions[$index].type == 'multiple'">Answer
+                            <i class="fa fa-lg fa-plus-square  m-r-5" ng-click="$ctrl.addAnswerBtn($index)"></i>
+                        </p>
+                    </p>
+                </div>
+                <p class="pull-right form-group" ng-show="$ctrl.questionnairesData.isDraft == true">Question
+                    <i class="fa fa-lg fa-plus-square m-r-5" ng-click="$ctrl.addQuestionBtn()"></i>
+                </p>
+
+                <div class="form-group">
+                    <button class="btn btn-sm btn-success m-r-5" ng-click="$ctrl.postQuestionnaireBtn()">Create Questionnaire</button>
+                    <button class="btn btn-sm btn-default m-r-5" ng-click="$ctrl.cancelBtn()">Cancel</button>
+                </div>
+                <div class="m-t-20" ng-show="$ctrl.questionnairesData._id">
+                    <p>
+                        <strong>UserID </strong>{{$ctrl.questionnairesData.userId}}</p>
+                    <p>
+                        <strong>Date Created </strong>{{$ctrl.questionnairesData.dateCreated}}</p>
+                    <p>
+                        <strong>Date Modified </strong>{{$ctrl.questionnairesData.dateModified}}</p>
+                </div>
+            </fieldset>
+    </div>
+    </form>
+</div>
+</div>

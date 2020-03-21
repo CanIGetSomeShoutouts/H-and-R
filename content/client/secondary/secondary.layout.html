@@ -1,0 +1,111 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+
+        <a class="navbar-brand" href="/">
+        <span class="navbar-logo"></span>Heal and Recover
+    </a>
+        <button  class="navbar-toggler" type="button" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" ng-click="$ctrl.showToggle()"></span>
+    </button>
+        
+            <div show class="navbar-collapse" id="navbarCollapse" ng-show="$ctrl.showNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link" href="/anon/login">Login </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-lg" href="/anon/registration">SignUp</a>
+                    </li>
+                </ul>
+            </div>
+        
+        </div>
+    </nav>
+    <div ui-view="body"></div>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <h4>About Us</h4>
+                <p>
+                    This is a placeholder! It's purpose it to provide some sort of example text that's value shouldn't be taken seriously, but it's presence should give you a sense of what text with value would look like.
+                </p>
+            </div>
+            <!--/.column-->
+            <div class="col-md-6 col-lg-3">
+                <h4>Quick Links</h4>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/anon/registration" class="btn btn-underline">Sign Up</a>
+                    </li>
+                    <li>
+                        <a href="/anon/login" class="btn btn-underline">Login</a>
+                    </li>
+                    <li>
+                        <a href="mailto:{{ $ctrl.email }}" class="btn btn-underline">Contact us</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!--/.column-->
+            <div class="col-md-6 col-lg-3">
+                <h4>About us</h4>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#" class="btn btn-underline">Terms &amp; conditions</a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-underline">Privacy &amp; policy</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.column-->
+            <div class="col-md-6 col-lg-3">
+                <h4>Social Media</h4>
+                <div class="mb30">
+                    <form lpformnum="2">
+                        <div class="form-group">
+                            <button type="submit" class="btn-newsletter">
+                                <i class="fa fa-paper-plane-o"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <ul class="social list-inline mb30">
+                    <li class="list-inline-item">
+                        <a class="facebook" href="#">
+                            <i class="fa fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="twitter" href="#">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="gplus" href="#">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </li>
+                </ul>
+                <span class="font400">© Copyright 2018 Heal and Recover</span>
+            </div>
+            <!--/.column-->
+        </div>
+        <!--/.row-->
+    </div>
+    <!--/.container-->
+</footer>
+<!--/.footer-->
+
+<script>
+    "use strict"
+    setTimeout(() => {
+
+        $('#page-loader').addClass('hide')
+        $('#page-container').addClass('in')
+    })
+
+</script>

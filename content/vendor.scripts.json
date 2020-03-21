@@ -1,0 +1,50 @@
+{
+  "chunks": {
+    "vendor": [
+      "jquery",
+      "angular",
+      "angular-ui-router",
+      "bootstrap",
+      "angular-bootstrap",
+      "moment",
+      "eonasdan-bootstrap-datetimepicker",
+      "angular-eonasdan-datetimepicker",
+      "switchery",
+      "ngSwitchery",
+      "ngMask",
+      "summernote",
+      "angular-summernote",
+      "angular-sanitize",
+      "slimscroll",
+      "angular-slimscroll",
+      "angular-ui-validate",
+      "gritter", 
+      "ngAutocomplete",
+      "angular-ui-select",
+      "ngCookies"
+    ]
+  },
+  "paths": {
+    "jquery": "content/libs/jquery/dist/jquery.min.js",
+    "bootstrap": "content/libs/bootstrap/dist/js/bootstrap.min.js",
+    "angular": "content/libs/angular/angular.min.js",
+    "angular-ui-router": "content/libs/angular-ui-router/release/angular-ui-router.min.js",
+    "angular-bootstrap": "content/libs/angular-bootstrap/ui-bootstrap-tpls.min.js",
+    "moment": "content/libs/moment/min/moment.min.js",
+    "eonasdan-bootstrap-datetimepicker": "content/libs/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+    "angular-eonasdan-datetimepicker": "content/libs/angular-eonasdan-datetimepicker/dist/angular-eonasdan-datetimepicker.js",
+    "switchery": "content/libs/switchery/dist/switchery.js",
+    "ngSwitchery": "content/libs/ng-switchery/src/ng-switchery.js",
+    "ngMask": "content/libs/ngMask/dist/ngMask.min.js",
+    "angular-ui-validate": "content/libs/angular-ui-validate/dist/validate.min.js",
+    "ngAutocomplete": "content/libs/ngAutocomplete/src/ngAutocomplete.js",
+    "angular-summernote": "content/libs/angular-summernote/dist/angular-summernote.min.js",
+    "summernote": "content/theme/assets/plugins/summernote/summernote.min.js",
+    "angular-sanitize": "content/libs/angular-sanitize/angular-sanitize.min.js",
+    "slimscroll": "content/libs/slimScroll/jquery.slimscroll.min.js",
+    "angular-slimscroll": "content/libs/angular-slimscroll/angular-slimscroll.js",
+    "angular-ui-select": "content/libs/angular-ui-select/dist/select.min.js",
+    "gritter": "content/libs/jquery.gritter/js/jquery.gritter.min.js",
+    "ngCookies": "content/libs/angular-cookies/angular-cookies.min.js"
+  }
+}

@@ -1,0 +1,56 @@
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Posts</h4>
+    </div>
+    <div class="panel-body">
+        <div>
+            <button type="button" ui-sref="^.detail" class="btn btn-success">Create</button>
+        </div>
+        <br>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Client Username
+                        </th>
+                        <th>
+                            Subject
+                        </th>
+                        <th>
+                            Viewer Id's
+                        </th>
+                        <th>
+                            Edit / Delete
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="post in $ctrl.supportPosts">
+                        <td>
+                            {{post.clientUsername}}
+                        </td>
+                        <td>
+                            {{post.subject}}
+                        </td>
+                        <td>
+                            <div ng-repeat="viewerIds in post.viewerIds track by $index">
+                                {{viewerIds}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button" ui-sref="^.detail({id: post._id})" class="btn btn-default">Edit</button>
+                                    <button type="button" ng-click="$ctrl.formData = post; $ctrl.deactivate(post._id)" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

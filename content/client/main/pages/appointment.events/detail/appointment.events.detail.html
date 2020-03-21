@@ -1,0 +1,73 @@
+<div class="col-md-12">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Set Up Your Appointment</h4>
+        </div>
+        <div class="panel-body">
+            <form name="$ctrl.form" ng-submit="$ctrl.submit()">
+                <div class="form-group" ng-class="{ true: 'has-error has-feedback' } [$ctrl.form.title.$invalid && ($ctrl.form.title.$dirty || $ctrl.form.title.$touched)]">
+                    <label class="control-label" for="title">Event Title</label>
+                    <input type="text" name="title" autocomplete="false" id="title" placeholder="Name Event" class="form-control" ng-model="$ctrl.formData.title"
+                        ng-maxlength="50" required>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.form.title.$invalid && ($ctrl.form.title.$touched || $ctrl.form.title.$dirty)"></span>
+                    <span class="help-block" ng-show="$ctrl.form.title.$invalid && ($ctrl.form.title.$touched || $ctrl.form.title.$dirty)">Title Is Required</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="addressId">Address Id (optional)</label>
+                    <select name="addressId" id="addressId" class="form-control" ng-model="$ctrl.formData.addressId" ng-options="items._id as items.lineOne + ' ' + items.lineTwo + ', ' + items.city + ', ' + items.stateCode + ' ' + items.postalCode for items in $ctrl.appointmentEvents"></select>
+                </div>
+                <div class="form-group" ng-class="{ true: 'has-error has-feedback' } [$ctrl.form.teleconferenceInfo.$invalid && ($ctrl.form.teleconferenceInfo.$dirty || $ctrl.form.addressId.$touched)]">
+                    <label class="control-label" for="teleconferenceInfo">Teleconference Info (optional)</label>
+                    <input type="text" name="teleconferenceInfo" id="teleconferenceInfo" class="form-control" placeholder="Enter Teleconference Information"
+                        ng-model="$ctrl.formData.teleconferenceInfo">
+                </div>
+                <div class="form-group" ng-class="{ true: 'has-error has-feedback' } [$ctrl.form.participantIds.$invalid && ($ctrl.form.participantIds.$dirty || $ctrl.form.participantIds.$touched)]">
+                    <label class="control-label" for="participantIds">Participant Ids</label>
+                    <input class="form-control" name="participantIds" id="participantIds" type="text" placeholder="Enter Participant Ids" ng-model="$ctrl.formData.participantIdsString"
+                        required ng-pattern="/^[a-fA-F0-9\s]+(?:,[a-fA-F0-9\s]*)*$/">
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.form.participantIds.$invalid && ($ctrl.form.participantIds.$touched || $ctrl.form.participantIds.$dirty)"></span>
+                    <span class="help-block" ng-show="$ctrl.form.participantIds.$invalid && ($ctrl.form.participantIds.$touched || $ctrl.form.participantIds.$dirty) && $ctrl.form.participantIds.$error.required">ParticipantIds Is Required</span>
+                    <span class="help-block" ng-show="$ctrl.form.participantIds.$invalid && ($ctrl.form.participantIds.$touched || $ctrl.form.participantIds.$dirty) && $ctrl.form.participantIds.$error.pattern">Participant Id's must include only letters a-f, A-F, numbers, and be 24 characters long. Separate them
+                        by commas.</span>
+
+                </div>
+                <div class="form-group" ng-class="{ true: 'has-error has-feedback' } [$ctrl.form.description.$invalid && ($ctrl.form.description.$touched || $ctrl.form.description.$dirty)]">
+                    <label class="control-label" for="description">Quick Description Of Your Event</label>
+                    <textarea type="text" name="description" id="description" class="form-control" placeholder="Enter your description." ng-model="$ctrl.formData.description"
+                        ng-maxlength="50" required></textarea>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.form.description.$invalid && ($ctrl.form.description.$touched || $ctrl.form.description.$dirty)"></span>
+                    <span class="help-block" ng-show="$ctrl.form.description.$invalid && ($ctrl.form.description.$touched || $ctrl.form.description.$dirty)">Description Is Required</span>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : $ctrl.form.date.$dirty && $ctrl.form.date.$error.required }">
+                    <label class="control-label" for="date">Date/Time</label>
+                    <div class="input-group">
+                        <input name="date" datetimepicker id="date" ng-model="$ctrl.formData.date" options="$ctrl.options" class="form-control" placeholder="MM/DD/YYYY"
+                            required>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.form.date.$invalid && ($ctrl.form.date.$touched || $ctrl.form.date.$dirty)"></span>
+                    <span ng-show="form.date.$invalid && !form.date.$pristine" class="help-block">Date Is Required</span>
+                </div>
+                <div class="form-group pull-right">
+                    <button class="btn btn-success btn-sm" type="button" ng-click="$ctrl.submit()" ng-disabled="$ctrl.form.$invalid">Submit Appointment</button>
+                    <button class="btn btn-default btn-sm" type="button" ui-sref="^.list">Cancel</button>
+                </div>
+            </form>
+
+            <div class="form-group">
+                <p class="form-control-static">
+                    Date created: {{$ctrl.formData.dateCreated | date:'medium'}}
+                </p>
+                <p class="form-control-static">
+                    Date modified: {{$ctrl.formData.dateModified | date:'medium'}}
+                </p>
+                <p class="form-control-static">
+                    Username: {{$ctrl.username}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>

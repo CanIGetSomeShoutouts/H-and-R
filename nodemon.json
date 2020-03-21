@@ -1,0 +1,9 @@
+{
+    "delay": 500,
+    "watch": [
+        "app"
+    ],
+    "ignore": [
+        "content"
+    ]
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <base href="/" />
+    <title>Starter Node and Angular</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <!-- CSS -->
+   
+    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="/theme/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/libs/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/react-datetime/react-datetime.css">
+    <link rel="stylesheet" type="text/css" href="/css/react-select/react-select.css">
+  
+    <link href="/theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKMhJOiYA4nKjnf0o3hgR17JGJNWU2fww&libraries=places"></script>
+    <link href="/theme/assets/plugins/jquery-jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="/theme/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="/theme/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/libs/switchery/dist/switchery.min.css">
+    <link rel="stylesheet" href="/libs/angular-ui-select/dist/select.min.css">
+    <link href="theme/assets/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="/theme/assets/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
+    <link href="/theme/assets/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="/theme/assets/css/animate.min.css" rel="stylesheet" />
+    <link href="/theme/assets/css/style.min.css" rel="stylesheet" />
+    <link href="/theme/assets/css/style-responsive.min.css" rel="stylesheet" />
+    <link href="/theme/assets/css/theme/default.css" rel="stylesheet" id="theme" />
+
+    
+
+
+    <!-- custom styles -->
+    
+
+    <!-- ================== BEGIN BASE JS ================== -->
+    <link rel='stylesheet' href="/css/style.css" type="text/css" />
+    <script src="/theme/assets/plugins/pace/pace.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+
+</head>
+
+<body ng-app="client.main" ng-strict-di>
+    <div id="page-loader" class="fade in">
+        <span class="spinner"></span>
+    </div>
+
+    <div ui-view="content"></div>
+
+    <script src="/build/vendor.js"></script>
+    <script src="/build/all.react.js"></script>
+    <script src="/build/all.js"></script>
+</body>
+
+</html>

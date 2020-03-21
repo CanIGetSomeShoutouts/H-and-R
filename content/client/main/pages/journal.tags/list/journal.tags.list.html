@@ -1,0 +1,52 @@
+<div class="panel panel-inverse" data-sortable-id="table-basic-1">
+    <div class="panel-heading">
+        <h4 class="panel-title">All Journal Tags</h4>
+    </div>
+    <div class="panel-body">
+        <button class="btn btn-success m-b-5" ui-sref="main.journalTags.details({id: null})">Create New</button>
+        <div class="col-md-2 pull-right">
+            <button ng-click="$ctrl.openIconModal()" class="btn btn-default pull-right">Upload Icon Pack</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Severity Min</th>
+                        <th>Severity Max</th>
+                        <th>Severity Step</th>
+                        <th>Alert Threshold</th>
+                        <th>Client Username</th>
+                        <th>Summary</th>
+                        <th>Icon</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in $ctrl.journalTags">
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.type }}</td>
+                        <td>{{ item.severityMin }}</td>
+                        <td>{{ item.severityMax }}</td>
+                        <td>{{ item.severityStep }}</td>
+                        <td>
+                            <span style="color: red">{{ item.alertThreshold }}</span>
+                        </td>
+                        <td>{{ item.clientUsername }}</td>
+                        <td>{{ item.summary }}</td>
+                        <td>
+                            <span class="fa {{ item.iconName }}"></span>
+                        </td>
+                        <td>
+                            <div style="display: flex" class="col-md-6 btn-group">
+                                <button class="btn btn-default" ui-sref="main.journalTags.details({id:item._id })">Edit</button>
+                                <button class="btn btn-danger" ng-click="$ctrl.delete($index)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

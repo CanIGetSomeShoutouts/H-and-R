@@ -1,0 +1,86 @@
+<div class="row">
+    <h1>Register</h1>
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">Register Form</h4>
+        </div>
+        <div class="panel-body">
+            <form name="$ctrl.registerForm " novalidate ng-submit="$ctrl.formValidate()">
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('firstName'),'has-feedback': $ctrl.validBoth('firstName')}">
+                    <label for="firstName" class="control-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Please enter your first name?" ng-model="$ctrl.registerData.firstName"
+                        ng-pattern="/^[a-zA-Z]{2,16}$/" required>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.valid('firstName')"></span>
+                    <span class="control-label" ng-show="$ctrl.valid('firstName')">This field is required.</span>
+                    <span class="control-label" ng-show="$ctrl.valid('firstName')">This field must contain letters and be between 2 - 16 characters in length</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('lastName'), 'has-feedback': $ctrl.validBoth('lastName')}">
+                    <label for="lastName" class="control-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Please enter your last name?" ng-model="$ctrl.registerData.lastName"
+                        ng-pattern="/^[a-zA-Z]{2,20}$/" required>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.valid('lastName')"></span>
+                    <span class="control-label help-block" ng-show="$ctrl.valid('lastName')">This field is required</span>
+                    <span class="control-label help-block" ng-show="$ctrl.valid('lastName')">This field must contain letters and be between 2 - 20 characters in length</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('username'), 'has-feedback': $ctrl.validBoth('username')}">
+                    <label for="username" class="control-label">Username</label>
+                    <input type="text" class="form-control" id="username " name="username" placeholder="Please enter a username" ng-model="$ctrl.registerData.username"
+                        ng-pattern="/^[a-zA-Z0-9-_]{5,18}$/" required/>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.valid('username')"></span>
+                    <span class="control-label" ng-show="$ctrl.valid('username')">This field is required and must be unique.</span>
+                    <span class="control-label" ng-show="$ctrl.valid('username')">This field can contain letters, dashes, and underscores. Length must be between 5 and 18.</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('email'), 'has-feedback': $ctrl.valid('email')}">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Please provide an email" ng-model="$ctrl.registerData.email"
+                        required>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.valid('email')"></span>
+                    <span class="control-label" ng-show="$ctrl.valid('email')">Valid email required.</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('password'), 'has-feedback': $ctrl.validBoth('password')}">
+                    <label for="password" class="control-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Please provide a password" ng-model="$ctrl.registerData.password"
+                        ng-pattern="/^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{6,24}$/" required>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.valid('password')"></span>
+                    <span class="control-label help-block" ng-show="$ctrl.valid('password')">This field is required.</span>
+                    <span class="control-label help-block" ng-show="$ctrl.valid('password')">Your password must contain one uppercase, one number, and be between 6 and 24 in length.</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('confirmPassword'), 'has-feedback':$ctrl.validBoth('confirmPassword')}">
+                    <label for="confirmPassword" class="control-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="$ctrl.registerData.confirmPassword"
+                        placeholder="Please match password to one above" ui-validate="{match:'$ctrl.matchPassword($value)'}"
+                        ui-validate-watch="{match: $ctrl.registerForm.password}">
+                    <span class="control-label help-block" ng-show="$ctrl.valid('confirmPassword')">Please make sure the password and confirm password match.</span>
+                </div>
+
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('userType'), 'has-feedback':$ctrl.validBoth('userType')}">
+                    <label for="userType" class="control-label">User Type</label>
+                    <div class="radio radio-css radio-inverse">
+                        <input type="radio" name="userType" id="cssRadio1" value="Client" ng-model="$ctrl.registerData.userType" required>
+                        <label for="cssRadio1" class="p-t-5">Client</label>
+
+                    </div>
+                    <div class="radio radio-css radio-inverse">
+                        <input type="radio" name="userType" id="cssRadio2" value="Therapist" ng-model="$ctrl.registerData.userType" required>
+                        <label for="cssRadio2" class="p-t-5">Therapist</label>
+                    </div>
+                    <span class="control-label help-block" ng-show="$ctrl.valid('userType')">Please select your user type</span>
+                </div>
+                <div class="form-group" ng-class="{'has-error': $ctrl.validBoth('privacyStatement'),'has-feedback': $ctrl.validBoth('privacyStatement')}">
+                    <label for="privacyStatement" class="control-label">Terms &amp; Conditions</label>
+                    <div class="checkbox checkbox-css checkbox-inverse">
+                        <input type="checkbox" id="privacyStatement" name="privacyStatement" ng-model="$ctrl.registerData.agreesToPrivacyStatement"
+                            required>
+                        <label for="privacyStatement" class="p-t-5">Agree To Privacy Statement</label>
+
+                    </div>
+                    <span class="control-label help-block" ng-show="$ctrl.valid('privacyStatement')">You must agree with the Privacy Statement.</span>
+                </div>
+                <div class="form-group"></div>
+                <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                <button type="submit" class="btn btn-success pull-right m-r-5">Register</button>
+        </div>
+        </form>
+    </div>
+</div>
+</div>

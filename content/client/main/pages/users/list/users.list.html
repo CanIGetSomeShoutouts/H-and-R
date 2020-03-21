@@ -1,0 +1,37 @@
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Index</h4>
+    </div>
+    <div class="panel-body">
+        <input type="button" class="btn btn-success" value="Create User" ui-sref="main.users.detail">
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Type</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in $ctrl.users">
+                        <td>{{x.firstName}} {{x.lastName}}</td>
+                        <td>{{x.username}}</td>
+                        <td>{{x.userType}}</td>
+                        <td>{{x.email}}</td>
+                        <td>{{x.phone}}</td>
+                        <td>
+                            <input type="button" class="btn btn-default" value="Edit" ng-click="$ctrl.click(x._id)">
+                            <input type="button" class="btn btn-danger" value="Delete" ng-click="$ctrl.delete(x._id, $index)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

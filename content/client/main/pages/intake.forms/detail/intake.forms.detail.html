@@ -1,0 +1,79 @@
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title"></h4>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <div class='clearfix'>
+
+                <form class='container' name="$ctrl.intakeFormForm" ng-submit="$ctrl.submitValidation()" novalidate>
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : $ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.therapistId.$invalid}">
+                        <label class='control-label' for='therapistId'>Therapist ID</label>
+                        <input type='text' ng-model='$ctrl.intakeFormsD.therapistId' name='therapistId' class='form-control' id='therapistId' placeholder='Therapist ID'
+                            required>
+                        <span class="fa fa-times form-control-feedback" ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.therapistId.$invalid"></span>
+                        <p ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.therapistId.$error.required" class="help-block">Input is required.</p>
+                    </div>
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : $ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.insuranceProvider.$invalid}">
+                        <label class='control-label' for="insuranceProvider">Insurance Provider</label>
+                        <input type="text" ng-model="$ctrl.intakeFormsD.insuranceProvider" ng-maxlength="100" class="form-control" name="insuranceProvider"
+                            id="insuranceProvider" placeholder="Insurance Provider" required>
+                        <span class="fa fa-times form-control-feedback" ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.insuranceProvider.$invalid"></span>
+                        <p ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.insuranceProvider.$error.maxlength" class="help-block">Max length is 100.</p>
+                        <p ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.insuranceProvider.$error.required" class="help-block">Input is required.</p>
+                    </div>
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : $ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.history.$invalid}">
+                        <label class='control-label' for="history">History ("Explain the conditions you have previously and/or are currently experiencing")</label>
+                        <input type="text" ng-model="$ctrl.intakeFormsD.history" ng-maxlength="2000" class="form-control" name="history" id="history"
+                            placeholder="History" required>
+                        <span class="fa fa-times form-control-feedback" ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.history.$invalid"
+                            }></span>
+                        <p ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.history.$error.maxlength" class="help-block">Max length is 2000.</p>
+                        <p ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.history.$error.required" class="help-block">Input is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class='control-label' for="traumaDate">Trauma Date (optional)</label>
+                        <div class='input-group'>
+                            <input datetimepicker ng-model="$ctrl.intakeFormsD.traumaDate" class="form-control" name="traumaDate" id="traumaDate" placeholder="Trauma Date">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback" ng-class="{ 'has-error' : $ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.currentPlace.$invalid}">
+                        <label class='control-label' for="currentPlace">Current Place (where are you now?)</label>
+                        <input type="text" ng-model="$ctrl.intakeFormsD.currentPlace" ng-maxlength="1000" class="form-control" name="currentPlace"
+                            id="currentPlace" placeholder="Current Place" required>
+                        <span class="fa fa-times form-control-feedback" ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.history.$invalid"></span>
+                        <p ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.currentPlace.$error.maxlength" class="help-block">Max length is 1000.</p>
+                        <p ng-show="$ctrl.intakeFormForm.$submitted && $ctrl.intakeFormForm.currentPlace.$error.required" class="help-block">Input is required.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class='control-label' for="traumaTypeIds">Trauma Types</label>
+                        <ui-select multiple ng-model="$ctrl.intakeFormsD.traumaTypeIds" theme="bootstrap" close-on-select="false" name="traumaTypeIds"
+                            id="traumaTypeIds">
+                            <ui-select-match placeholder="Select one or more">{{ $item.name }}</ui-select-match>
+                            <ui-select-choices repeat="traumaType._id as traumaType in $ctrl.traumaTypes | filter: {name: $select.search}">
+                                {{ traumaType.name }}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Send</button>
+                    <button type="button" ui-sref="main.intakeForms.list" class="btn btn-default">Cancel</button>
+
+                    <div ng-if='($ctrl.intakeFormsD._id)' class="form-group">
+                        <label class="control-label" for="dateCreated">Date Created: </label>
+                        <p class="form-control-static"> {{ $ctrl.intakeFormsD.dateCreated }}</p>
+                        <label class="control-label" for="dateModified">Date Modified: </label>
+                        <p class="form-control-static"> {{ $ctrl.intakeFormsD.dateModified }}</p>
+                        <label class="control-label" for="dateDeactivated">Date Deactivated: </label>
+                        <p class="form-control-static"> {{ $ctrl.intakeFormsD.dateDeactivated }}</p>
+                        <label class="control-label" for="userId">User ID: </label>
+                        <p class="form-control-static"> {{ $ctrl.intakeFormsD.userId }}</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

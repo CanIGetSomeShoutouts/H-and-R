@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">All Journal Events</div>
+        <div class="panel-body">
+            <button type="button" class="btn btn-success m-b-5" ui-sref="main.journalsEvents.details({id:null})">Create</button>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <th>Title</th>
+                        <th>Details</th>
+                        <th>Trauma Types</th>
+                        <th>User ID</th>
+                        <th>Tags</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in $ctrl.journals">
+                            <td>{{x.title}}</td>
+                            <td width="400" ng-bind-html="x.contentHtml"></td>
+                            <td>
+                                <p ng-repeat="y in x.traumaTypeIds">
+                                    {{x.traumaTypeIds[$index]}}
+                                </p>
+
+                            </td>
+
+                            <td>{{x.userId}}</td>
+
+                            <td>
+                                <p ng-repeat="traumaTag in x.emotionalTags">
+                                    {{traumaTag.id}}
+                                </p>
+
+                                <p ng-repeat="traumaTag in x.physicalTags">
+                                    {{traumaTag.id}}
+                                </p>
+
+                                <p ng-repeat="traumaTag in x.triggerTags">
+                                    {{traumaTag.id}}
+                                </p>
+
+                                <p ng-repeat="traumaTag in x.socialTags">
+                                    {{traumaTag.id}}
+                                </p>
+
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-default" ui-sref="main.journalsEvents.details({id:x._id})">Edit</button>
+                                    <button type="button" class="btn btn-danger" ng-click="$ctrl.delete(x._id, $index)">Delete</button>
+                                </div>
+                            </td>
+                         
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

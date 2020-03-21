@@ -1,0 +1,155 @@
+<div ui-view="questionnaireResponsesDetail">
+    <!-- For to make responses -->
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- begin panel -->
+            <div class="panel panel-inverse" data-sortable-id="form-stuff-3">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Form Details</h4>
+                </div>
+                <div class="panel-body">
+                    <form name="$ctrl.questionnaireResponsesForm" novalidate>
+                        <fieldset>
+                            <div class="row form-horizontal">
+                                <div class="col-sm-12">
+                                    <div ng-class="{ 'has-error': $ctrl.questionnaireResponsesForm.$submitted && ($ctrl.questionnaireResponsesForm.questionnaireId.$error.required || $ctrl.questionnaireResponsesForm.questionnaireId.$error.pattern) }" class="form-group has-feedback">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">Questionnaire ID</label>
+                                            <input name="questionnaireId" id="form-questionnaire-id" ng-model="$ctrl.formData.questionnaireId" type="text" class="form-control" required ng-pattern="/^[0-9a-fA-F]{24}$/" placeholder="Enter Questionnaire ID">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <!-- Error messages -->
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <p ng-show="$ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm.questionnaireId.$error.required" for="form-questionnaire-id" class="control-label help-block pull-left"><strong>Questionnaire Id is required</strong></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <p ng-show="$ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm.questionnaireId.$error.pattern" for="form-questionnaire-id" class="control-label help-block pull-left"><strong>Must contain only characters a-f, A-F, numbers, and be exactly 24 characters long</strong></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Feedback icon -->
+                                            <span ng-show="$ctrl.questionnaireResponsesForm.$submitted && ($ctrl.questionnaireResponsesForm.questionnaireId.$error.required || $ctrl.questionnaireResponsesForm.$error.pattern)" class="fa fa-times form-control-feedback"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <legend>List of Answers for Questionnaire</legend>
+                                            <button type="button" ng-click="$ctrl.addAnswer()" class="btn btn-default m-b-10"><i class="fa fa-plus-square-o"></i> Add Answer</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row form-group well m-b-10" ng-repeat="answer in $ctrl.formData.answers ">
+                                                <!-- Beginning of Answer Form -->
+                                                <div class="col-sm-12">
+                                                    <div class="form-horizontal">
+                                                        <div class="row">
+                                                            <div class="pull-right form-group col-sm-12">
+                                                                <a ng-click="$ctrl.removeAnswer($index)" class="btn btn-danger pull-right"><i class="fa fa-times "></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Question Index -->
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div ng-class="{ 'has-error':$ctrl.questionnaireResponsesForm.$submitted && ($ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.required || $ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.integer || $ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.min) }"
+                                                                    class="form-group">
+                                                                    <div class="col-sm-12 has-feedback">
+                                                                        <label class="control-label">Question Index</label>
+                                                                        <input name="questionIndex-{{$index}}" ng-model="answer.questionIndex" type="number" class="form-control m-b-10" ng-min="0" required integer>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <!-- Error Messages -->
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12">
+                                                                                        <p ng-show="$ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.required" class="control-label pull-left"><strong>Question Index is required</strong></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12">
+                                                                                        <p ng-show="$ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.integer" class="control-label pull-left"><strong>Integer number type is required</strong></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-12">
+                                                                                        <p ng-show="$ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.min" class="control-label pull-left"><strong>Question Index is required to be 0 or higher</strong></p>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- Feedback Icon -->
+                                                                        <span ng-show="$ctrl.questionnaireResponsesForm.$submitted && ($ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.required || $ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.integer || $ctrl.questionnaireResponsesForm['questionIndex-'+$index].$error.min)"
+                                                                            class="fa fa-times form-control-feedback"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div ng-class="{ 'has-error': $ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm['answerIndices-'+$index].$error.pattern }" class="form-group">
+                                                                    <div class="col-sm-12 has-feedback">
+                                                                        <!-- Answer Indices -->
+                                                                        <label class="control-label">Answer Indices</label>
+                                                                        <input name="answerIndices-{{$index}}" ng-model="answer.answerIndices" type="text" class="form-control m-b-10 " placeholder="Have answer indices seperated by commas (i.e:  1,2,3,4,5)" ng-pattern="/^[0-9]+(,[0-9]+)*$/">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <!-- Error Message -->
+                                                                                <p ng-show="$ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm['answerIndices-'+$index].$error.pattern" class="control-label pull-left"><strong>Have integer numbers seperated by commas (i.e:  1,2,3,4,5)</strong></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- Feedback Icon -->
+                                                                        <span ng-show="$ctrl.questionnaireResponsesForm.$submitted && $ctrl.questionnaireResponsesForm['answerIndices-'+$index].$error.pattern" class="fa fa-times form-control-feedback"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12 has-feedback">
+                                                                        <!-- Answer Text -->
+                                                                        <label>Text</label>
+                                                                        <input name="answerText-{{$index}}" ng-model="answer.text " type="text " class="form-control m-b-10 ">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End of Answer Form -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p ng-show="$ctrl.formData.dateCreated" class="form-control-static"><strong>Date Created:</strong> {{$ctrl.formData.dateCreated}}</p>
+                                    <p ng-show="$ctrl.formData.dateModified" class="form-control-static"><strong>Date Modified:</strong> {{$ctrl.formData.dateModified}}</p>
+                                    <p ng-show="$ctrl.formData.dateDeactivated" class="form-control-static"><strong>Date Deactivated:</strong> {{$ctrl.formData.dateDeactivated}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group col-sm-offset-5">
+                                        <button ng-click="$ctrl.onSaveBtn()" type="submit " class="btn btn-success m-r-5 ">Save</button>
+                                        <button ui-sref="^.list " type="submit " class="btn btn-default ">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- end panel body -->
+            </div>
+        </div>
+    </div>
+</div>

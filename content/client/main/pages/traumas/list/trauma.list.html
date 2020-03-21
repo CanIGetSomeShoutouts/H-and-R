@@ -1,0 +1,38 @@
+<div class="col-md-12">
+
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title"> Timeline</h4>
+        </div>
+        <div class="panel-body">
+            <button class="btn btn-success m-b-5" type="button" ui-sref="main.traumas.detail({id: null})">Create</button>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date (Begin Date - End Date)</th>
+                        <th>Type</th>
+                        <th>Summary</th>
+                        <th>Viewer Ids</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="history in $ctrl.traumaList">
+                        <td>{{history.beginDate | date : "MM/dd/y"}} - {{history.endDate | date : "MM/dd/y"}}</td>
+                        <td>{{history.type}}</td>
+                        <td>{{history.summary}}</td>
+                        <td>
+                            <p ng-repeat="ids in history.viewerIds">{{ids}}</p>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" id="edit" ui-sref="main.traumas.detail({id: history._id})" class="btn btn-default m-b-5">Edit</button>
+                                <button type="button" ng-click="$ctrl.delete(history._id, $index)" class="btn btn-danger m-b-5">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

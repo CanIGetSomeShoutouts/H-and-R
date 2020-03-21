@@ -1,0 +1,42 @@
+<div class="panel panel-inverse" data-sortable-id="table-basic-2">
+    <div class="panel-heading">
+        <h4 class="panel-title">All Questionnaires</h4>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <div>
+                <button class="btn btn-sm btn-success m-b-5" ui-sref="main.questionnaires.details({id: null})">Create</button>
+            </div>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Questionnaire Name</th>
+                        <th>Is Draft</th>
+                        <th>Description</th>
+                        <th>Trauma Types</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="questionnaire in $ctrl.questionnaires">
+
+                        <td>{{questionnaire.name}}</td>
+                        <td>{{questionnaire.isDraft}}</td>
+                        <td width="300">{{questionnaire.description}}</td>
+                        <div>
+                            <td>
+                                <p ng-repeat="traumaTypeId in questionnaire.traumaTypeIds">{{traumaTypeId}}</p>
+                            </td>
+                        </div>
+                        <td>
+                            <div class="btn-group">
+                                <button ui-sref="main.questionnaires.details({id: questionnaire._id})" class="btn">Edit</button>
+                                <button ng-click="$ctrl.delete(questionnaire._id)" class="btn btn-danger">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

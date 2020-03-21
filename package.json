@@ -1,0 +1,85 @@
+{
+  "name": "node-angular-starter",
+  "main": "server.js",
+  "version": "2.0.0",
+  "scripts": {
+    "heroku-postbuild": "gulp prod",
+    "postinstall": "bower prune && bower install",
+    "preinstall": "npm prune",
+    "serve": "nodemon server.js"
+  },
+  "cacheDirectories": [
+    "content/libs"
+  ],
+  "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
+    "angular-eonasdan-datetimepicker": "^0.3.9",
+    "angular-sanitize": "^1.6.9",
+    "angular-slimscroll": "^1.0.0",
+    "aws-sdk": "^2.194.0",
+    "axios": "^0.17.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "~1.4.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "fullcalendar-reactwrapper": "^1.0.7",
+    "joi": "^11.1.1",
+    "joi-objectid": "^2.0.0",
+    "jquery": "^3.3.1",
+    "jszip": "^3.1.5",
+    "moment": "^2.20.1",
+    "mongodb": "^3.0.1",
+    "multer": "^1.3.0",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-cookies": "^0.1.0",
+    "react-datetime": "^2.14.0",
+    "react-dom": "^16.2.0",
+    "react-owl-carousel": "^2.2.0",
+    "react-select": "^1.2.1",
+    "react-summernote": "^2.0.0",
+    "react-switchery-component": "0.0.7",
+    "sanitize-html": "^1.17.0",
+    "summernote": "^0.8.9",
+    "ui-select": "^0.19.8"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babelify": "^8.0.0",
+    "bower": "^1.8.2",
+    "browserify": "^15.2.0",
+    "browserify-shim": "^3.8.14",
+    "eslint": "^3.13.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "event-stream": "^3.3.4",
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-bro": "^1.0.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^2.0.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.12.1",
+    "gulp-strip-comments": "^2.4.5",
+    "gulp-uglify": "^2.1.0",
+    "gulp-zip": "^4.0.0",
+    "lodash": "^4.17.4",
+    "merge-stream": "^1.0.1",
+    "minimist": "^1.2.0"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "global:jQuery"
+  }
+}

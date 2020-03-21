@@ -1,0 +1,43 @@
+<div class="panel panel-inverse" data-sortable-id="table-basic-5">
+
+    <div class="panel-heading ">
+        <h4 class="panel-title ">All Addresses</h4>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-group ">
+            <button type="button" ui-sref="^.detail({id: null})" class="btn  btn-success m-r-5">Enter A New Address</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table table-hover">
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Postal Code</th>                    
+                        <th>UserId</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="addresses in $ctrl.addresses">
+                    <tr>
+                        <td>{{addresses.lineOne}} {{addresses.lineTwo}} </td>
+                        <td>{{addresses.city}}</td>
+                        <td>{{addresses.stateCode}}</td>
+                        <td>{{addresses.postalCode}} </td>                       
+                        <td>{{addresses._id}}</td>
+                        <td>
+                            <div class="btn-group ">
+
+                                <button type="button" ui-sref="^.detail({id: addresses._id, addresses: formattedAddress })" class="btn  btn-default">Edit</button>
+                                <button type="button" ng-click="$ctrl.delete(addresses._id)" class="btn btn-danger" confirm="Are you sure you want to Delete">Delete</button>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

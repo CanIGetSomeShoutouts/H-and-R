@@ -1,0 +1,171 @@
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Details</h4>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-10" ng-model-options="{allowInvalid: true}">
+            <form name="$ctrl.tagForm" novalidate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('name'), 'has-feedback': $ctrl.validationSetup('name')}" class="form-group has-feedback">
+                            <label class="control-label">Name</label>
+                            <input name="name" ng-model="$ctrl.formData.name" class="form-control" ng-minlength="2" ng-maxlength="50" required>
+                            <span ng-show="$ctrl.validationSetup('name')" class="form-control-feedback">
+                                <i class="fa fa-times"></i>
+                            </span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('name', 'required')">Name is required.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('name', 'minlength')">Name must be at least 2 characters long.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('name', 'maxlength')">Name must be less then 40 characters long.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('type'), 'has-feedback': $ctrl.validationSetup('type')}" class="form-group has-feedback">
+                            <label class="control-label">Type</label>
+                            <select name="type" ng-model="$ctrl.formData.type" class="form-control" required>
+                                <option value="">-Please Select-</option>
+                                <option value="Emotional">Emotional</option>
+                                <option value="Physical">Physical</option>
+                                <option value="Social">Social</option>
+                                <option value="Trigger">Trigger</option>
+                            </select>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('type', 'required')">Please select a type.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('iconId')}" class="form-group has-feedback">
+                            <label class="control-label">Icon</label>
+                            <ui-select ng-model="$ctrl.formData.iconId" theme="bootstrap" title="Choose an icon" required>
+                                <ui-select-match placeholder="Select icon...">
+                                    <img width="15" height="15" ng-src="data:image/image;base64,{{$select.selected.data}}"> {{$select.selected.set}} - {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="icons._id as icons in $ctrl.icons">
+                                    <img width="25" height="25" ng-src="data:image/image;base64,{{icons.data}}"> {{icons.set}} - {{icons.name}}
+                                </ui-select-choices>
+
+                            </ui-select>
+                            <input type="hidden" name="iconId" ng-model="$ctrl.formData.iconId" class="form-control" required />
+                            <span class="control-label help-block" ng-show="$ctrl.validationMessage('iconId', 'required')">Icon Name is required.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('clientId')}" class="form-group has-feedback">
+                            <label class="control-label">Client Username</label>
+                            <select name="clientId" ng-model="$ctrl.formData.clientId" class="form-control" ng-change="$ctrl.clearAlert()" ng-options="x._id as x.username for x in $ctrl.clients" ng-required="!$ctrl.formData.alertThreshold">
+                                <option value=" ">-Please Select-</option>
+                            </select>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('clientId', 'required')">Please select a Client or add a Alert Threshold.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('severityMin')}" class="form-group">
+                            <label name="control-label">Severity Min</label>
+                            <input name="severityMin" ng-pattern='/^\d+$/' ng-model="$ctrl.formData.severityMin" ng-min="1" type="number" ui-validate="{lessThan: '$ctrl.minLessThanMax($value)'}" ui-validate-watch="{lessThan: '$ctrl.formData.severityMax'}" class="form-control" required>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityMin', 'required')">Severity Minimum is required.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityMin', 'min')">Must be no lower than 1.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityMin', 'pattern')">Must be a whole number.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityMin', 'lessThan')">Severity Minimum must be less than Severity Maximum.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('severityMax')}" class="form-group">
+                            <label class="control-label">Severity Max</label>
+                            <input name="severityMax" ng-pattern='/^\d+$/' ng-model="$ctrl.formData.severityMax" ng-min="3" type="number" class="form-control" required>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityMax', 'required')">Severity Maximum is required.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityMax', 'min')">Must be no lower than 3.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityMax', 'pattern')">Must be a whole number.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('severityStep')}" class="form-group">
+                            <label class="control-label">Severity Step</label>
+                            <input name="severityStep" ng-pattern='/^\d+$/' ng-model="$ctrl.formData.severityStep" ng-min="1" type="number" class="form-control" ui-validate="{stepDivide: '$ctrl.maxMinEvenlyDivisible($value)'}" ui-validate-watch-collection="['$ctrl.formData.severityMin', '$ctrl.formData.severityMax']"
+                                required>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityStep', 'required')">Severity Step is required.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityStep', 'min')">Must be no lower than 1.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityStep', 'pattern')">Must be a whole number.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('severityStep', 'stepDivide')">Severity Maximum minus Severity Minimum must be divisible by Severity Step.</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div ng-class="{'has-error': $ctrl.validationSetup('alertThreshold')}" class="form-group">
+                            <label class="control-label">Alert Threshold (Site-Wide Tags)</label>
+                            <input ng-disabled="($ctrl.formData.clientId)" name="alertThreshold" ng-pattern='/^\d+$/' ng-model="$ctrl.formData.alertThreshold" ng-min="1" type="number" ui-validate="{divide:'$ctrl.alertEvenlyDivisible($value)',
+                                range: '$ctrl.alertInRange($value)'}" ui-validate-watch="{divide:
+                                '$ctrl.formData.severityStep'}" class="form-control" ui-validate-watch-collection="['$ctrl.formData.severityMin',
+                                '$ctrl.formData.severityMax', '$ctrl.formData.clientId']" ng-required="!$ctrl.formData.clientId">
+
+                            <span class="control-label" ng-show="$ctrl.validationMessage('alertThreshold', 'min')">Must be no lower than 1.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('alertThreshold', 'pattern')">Must be a whole number.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('alertThreshold', 'divide')">Alert Threshold must be evenly divisible by Severity Step.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('alertThreshold', 'range')">Alert Threshold must be in between Severity Minimum and Severity Maximum.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('alertThreshold', 'required')">Alert Threshold is required.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div ng-class="{ 'has-error': $ctrl.validationSetup('summary'), 'has-feedback': $ctrl.validationSetup(
+                                'summary')}" class="form-group has-feedback">
+                            <label class="control-label">Summary</label>
+                            <input name="summary" ng-model="$ctrl.formData.summary" ng-minlength="10" ng-maxlength="1000" class="form-control" required></input>
+                            <span ng-show="$ctrl.validationSetup('summary')" class="form-control-feedback">
+                                <i class="fa fa-times"></i>
+                            </span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('summary', 'required')">Summary is required.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('summary', 'minlength')">Must be at least 10 characters long.</span>
+                            <span class="control-label" ng-show="$ctrl.validationMessage('summary', 'maxlength')">Must be no more than 1000 characters long.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 pull-right">
+                        <button ng-hide="$ctrl.formData._id" ng-click="$ctrl.create()" class="btn btn-success pull-right">Create</button>
+                        <button ng-show="$ctrl.formData._id" ng-click="$ctrl.update()" class="btn btn-success pull-right">Edit</button>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <button class="btn btn-default pull-right" ui-sref="main.journalTags.list">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="journalTagsDetail-tagPreview" ng-show="!$ctrl.formData._id">
+            <div>
+                <label>
+                    <strong class="">Tag Name Preview</strong>
+                </label>
+                <p class="form-control-static" ng-bind="$ctrl.createTagName()"></p>
+            </div>
+        </div>
+        <div class="journalTagsDetail-tagPreview" ng-show="$ctrl.formData._id">
+            <div>
+                <label>
+                    <strong>User ID </strong>
+                </label>
+                <p class="form-control-static">{{ $ctrl.formData.userId }}</p>
+            </div>
+
+            <div>
+                <label>
+                    <strong>Tag Name Preview</strong>
+                </label>
+                <p class="form-control-static" ng-bind="$ctrl.createTagName()"></p>
+            </div>
+
+            <div>
+                <label>
+                    <strong>Date Created </strong>
+                </label>
+                <p class="form-control-static">{{ $ctrl.formData.dateCreated }}</p>
+            </div>
+            <div>
+                <label>
+                    <strong>Date Modified </strong>
+                </label>
+                <p class="form-control-static">{{ $ctrl.formData.dateModified }}</p>
+            </div>
+        </div>
+    </div>
+</div>

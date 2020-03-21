@@ -1,0 +1,39 @@
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">Invites Index</h4>
+    </div>
+    <div class="panel-body">
+        <input type="button" class="btn btn-success" value="Create Invite" ui-sref="main.treatmentInvitations.detail({id: null})">
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email / Username</th>
+                        <th>User Id</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in $ctrl.invites">
+                        <td>{{x.firstName}}</td>
+                        <td>{{x.lastName}}</td>
+                        <td>{{x.email}}{{x.username}}</td>
+                        <td>{{x.userId}}</td>
+                        <td>
+                            <div class="btn group">
+                                <input type="button" class="btn btn-default" value="Edit" ui-sref="main.treatmentInvitations.detail({id: x._id})">
+                                <input type="button" class="btn btn-danger" value="Delete" ng-click="$ctrl.delete(x._id, $index)">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,80 @@
+<div class="col-md-12">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title"> Trauma History Entry</h4>
+        </div>
+        <div class="panel-body">
+
+            <form name="$ctrl.form" ng-submit="$ctrl.postOrPut()" novalidate>
+
+                <div class="form-group" ng-class="{ 'has-error' : $ctrl.form.beginDate.$dirty && $ctrl.form.beginDate.$error.required}">
+                    <label class="control-label">Begin Date</label>
+                    <div class="input-group">
+                        <input name="beginDate" on-change="$ctrl.optionsUpdate($ctrl.beginDate, $ctrl.endDate)" class="form-control" datetimepicker
+                            ng-model="$ctrl.formData.beginDate" placeholder="MM/DD/YYYY" options="$ctrl.beginOptions" required>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span class="help-block" ng-show="$ctrl.form.beginDate.$error.required && $ctrl.form.beginDate.$dirty">Field is required.</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">End Date (Optional)</label>
+                    <div class="input-group">
+                        <input name="endDate" on-change="$ctrl.optionsUpdate($ctrl.beginDate, $ctrl.endDate)" class="form-control" datetimepicker
+                            ng-model="$ctrl.formData.endDate" placeholder="MM/DD/YYYY" options="$ctrl.endOptions">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class='form-group'>
+                    <label>Type</label>
+                    <select name="Type" class="form-control" ng-model="$ctrl.formData.type">
+                        <option value='' selected>Select a type</option>
+                        <option value='Single'>Single</option>
+                        <option value='Intermittent'>Intermittent</option>
+                        <option value='Ongoing'>Ongoing</option>
+                    </select>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error':$ctrl.form.summary.$dirty && $ctrl.form.summary.$error.required, 'has-feedback':$ctrl.form.summary.$dirty && $ctrl.form.summary.$error.required }">
+                    <label for="summary" class="control-label">Summary</label>
+                    <textarea name="summary" maxlength="200" class="form-control" ng-model="$ctrl.formData.summary" rows="5" required></textarea>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.form.summary.$error.required && $ctrl.form.summary.$dirty"></span>
+                    <span class="help-block" ng-show="$ctrl.form.summary.$error.required && $ctrl.form.summary.$dirty">Field is required.</span>
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error':$ctrl.form.description.$dirty && $ctrl.form.description.$error.required, 'has-feedback':$ctrl.form.description.$dirty && $ctrl.form.description.$error.required }">
+                    <label for="description" class="control-label">Description</label>
+                    <textarea name="description" maxlength="2000" class="form-control" ng-model="$ctrl.formData.description" rows="5" required></textarea>
+                    <span class="fa fa-times form-control-feedback" ng-show="$ctrl.form.description.$error.required && $ctrl.form.description.$dirty"></span>
+                    <span class="help-block" ng-show="$ctrl.form.description.$error.required && $ctrl.form.description.$dirty">Field is required.</span>
+                </div>
+
+                <div class='form-group'>
+                    <label for="viewerIds" class='control-label'>Viewer Ids</label>
+                    <ui-select multiple theme="bootstrap" close-on-select='false' title="Viewer Username" name='viewerIds' id='viewerIds' ng-model="$ctrl.formData.viewerIds">
+                        <ui-select-match placeholder="Select or Type a Viewer Username"> {{ $item.username }} </ui-select-match>
+                        <ui-select-choices repeat="viewer._id as viewer in $ctrl.viewerIds | filter: {username: $select.search} | orderBy:'username'"
+                            group-by="'userType'"> {{viewer.username}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div>
+                    <button class="btn btn-success m-r-5" type="submit" ng-disabled="$ctrl.form.$invalid">Save</button>
+                    <button class="btn btn-default m-r-5" type="button" ui-sref="main.traumas.list">Cancel</button>
+                </div>
+                <hr>
+
+                <div class="text-center" ng-show="$ctrl.formData._id">
+                    <p class="form-control-static">ID: {{$ctrl.formData.userId}}</p>
+                    <p class="form-control-static">Date Created: {{$ctrl.formData.dateCreated | date : "MM/dd/y"}}</p>
+                    <p class="form-control-static">Date Modified: {{$ctrl.formData.dateModified | date : "MM/dd/y"}}</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

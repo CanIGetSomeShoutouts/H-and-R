@@ -1,0 +1,71 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <h4 class="panel-title">File Upload</h4>
+        </div>
+        <div class="panel-body">
+            <form name="filesForm" novalidate>
+                <div class="row fileupload-buttonbar">
+                    <div class="col-md-12">
+                        <span class="btn btn-success fileinput-button">
+                            <i class="fa fa-plus"></i>
+                            <span>Add files...</span>
+                        <input type='file' name=file id='file-input' file-input="$ctrl.filesInput" multiple>
+                        </span>
+                        <button type="reset" ng-click="$ctrl.upload()" name="uploadBtn" class="btn btn-default start">
+                            <i class="fa fa-upload"></i>
+                            <span>Start upload</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="preview">
+                <div ng-class="{true:'has-error has-feedback'} [$ctrl.showError]">
+                    <label for="file" class="control-label" ng-bind="$ctrl.message"></label>
+                </div> 
+                <div class="table-responsive">
+                    <table role="presentation" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td><strong>Image</strong></td>
+                                <td><strong>Location</strong></td>
+                                <td><strong>File Name</strong></td>
+                                <td><strong>File Type</strong></td>
+                                <td><strong>File Size</strong></td>
+                                <td><strong>Options</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody class="files">
+                            <tr class="fade in" ng-repeat="file in $ctrl.filesUploaded">
+                                <td>
+                                    <a ng-if="file.type.includes('image')" ng-href="{{file.url}}"><img ng-style="$ctrl.style.image" ng-src="{{file.url}}"></a>
+                                    <a ng-if="!file.type.includes('image')"><i ng-style="$ctrl.style.icon" class="fa fa-4x fa-file-text"></i></a>
+                                </td>
+                                <td>
+                                    <span ng-bind="file.displayUrl"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="file.name"></span>
+                                </td>
+                                <td>
+                                    <span ng-bind="file.type"></span>
+                                </td>
+                                <td>
+                                    <span ng-show="file.size < 1000">{{file.size}} Bytes</span>
+                                    <span ng-show="file.size > 1000">{{file.size / 1000 }} Kb</span>
+                                    <span ng-show="file.size > 1000000">{{file.size / 1000000}} Mb</span>
+            
+                                </td>
+                                <td>
+                                    <button type="button" name="delete" class="btn btn-small btn-danger" ng-click="$ctrl.delete(file)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

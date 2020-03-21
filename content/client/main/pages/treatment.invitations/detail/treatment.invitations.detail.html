@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Treatment Invitation Details</h4>
+        </div>
+        <div class="panel-body">
+            <form name="$ctrl.form" ng-submit="$ctrl.formValidate()" class="col-sm-6" novalidate>
+                
+                <div class="form-group" ng-class="{true: 'has-error has-feedback'}[$ctrl.form.firstName.$error.required && $ctrl.form.$submitted]">
+                    <label for="firstName">First Name</label>
+                    <input required type="text" ng-model="$ctrl.invite.firstName" class="form-control" id="firstName" name="firstName" placeholder="Enter first name"
+                        ng-pattern="/^[A-zÀ-ÿ]{2,16}$/" />
+                    <span ng-class="{true: 'fa fa-times form-control-feedback'}[$ctrl.form.firstName.$error.required && $ctrl.form.$submitted]"></span>
+                    <span class="control-label" ng-show="$ctrl.form.firstName.$error.required && $ctrl.form.$submitted">This field can contain letters and must be between 2 and 16 in length.</span>
+                </div>
+
+                <div class="form-group" ng-class="{true: 'has-error has-feedback'}[$ctrl.form.lastName.$error.required && $ctrl.form.$submitted]">
+                    <label for="lastName">Last Name</label>
+                    <input required type="text" ng-model="$ctrl.invite.lastName" class="form-control" id="lastName" name="lastName" placeholder="Enter last name"
+                        ng-pattern="/^[A-zÀ-ÿ]{2,20}$/" />
+                    <span ng-class="{true: 'fa fa-times form-control-feedback'}[$ctrl.form.lastName.$error.required && $ctrl.form.$submitted]"></span>
+                    <span class="control-label" ng-show="$ctrl.form.lastName.$error.required && $ctrl.form.$submitted">This field can contain letters and must be between 2 and 20 in length.</span>
+                </div>
+                
+                <div class="form-group" ng-class="{true: 'has-error has-feedback'}[($ctrl.form.email.$error.required || $ctrl.form.email.$error.email) && $ctrl.form.$submitted]">
+                    <label for="email">Email</label>
+                    <input type="email" ng-model="$ctrl.invite.email" class="form-control" id="email" name="email" placeholder="Enter email" ng-required="!$ctrl.form.username.$viewValue" ng-disabled="$ctrl.form.username.$viewValue" />
+                    <span ng-class="{true: 'fa fa-times form-control-feedback'}[($ctrl.form.email.$error.required || $ctrl.form.email.$error.invalid) && $ctrl.form.$submitted]"></span>
+                    <span class="control-label" ng-show="($ctrl.form.email.$error.required || $ctrl.form.email.$error.email) && $ctrl.form.$submitted">Valid email or username required.</span>
+                </div>
+
+                <div class="form-group" ng-class="{true: 'has-error has-feedback'}[$ctrl.form.username.$invalid && $ctrl.form.$submitted || $ctrl.usernameNotFound]">
+                    <label for="username">Username</label>
+                    <input type="text" ng-model="$ctrl.invite.username" class="form-control" id="username" name="username" placeholder="Enter username" ng-required="!$ctrl.form.email.$viewValue" ng-disabled="$ctrl.form.email.$viewValue" ng-change="$ctrl.usernameChange()" ng-pattern="/^[a-zA-Z0-9-_]{5,18}$/"/>
+                    <span ng-class="{true: 'fa fa-times form-control-feedback'}[$ctrl.form.username.$invalid && $ctrl.form.$submitted || $ctrl.usernameNotFound]"></span>
+                    <span class="control-label" ng-show="$ctrl.form.username.$invalid && $ctrl.form.$submitted && !$ctrl.form.username.$error.pattern">Valid username or email required.</span>
+                    <span class="control-label" ng-show="$ctrl.usernameNotFound">Username Not Found</span>
+                    <span class="control-label" ng-show="$ctrl.form.username.$error.pattern && $ctrl.form.$submitted">Username must be between 5 and 18 characters</span>
+                </div> 
+                
+                    <button type="submit" ng-if='!$ctrl.invite._id' class="btn btn-success">Send invite</button>
+                    <button type="submit" ng-if='$ctrl.invite._id' class='btn btn-success'>Update Invite</button>                    
+                    <button type="button" ui-sref="main.treatmentInvitations.list" class="btn btn-default">Cancel</button>
+
+                </form>
+
+            <div ng-if="$ctrl.invite._id" class="col-sm-6">
+                <div class="form-group">
+                    <label for="_id">Invite Id </label>
+                    <p ng-bind="$ctrl.invite._id" class="form-control-static" name="_id"></p>
+                    <label for="userId">User Id</label>
+                    <p ng-bind="$ctrl.invite.userId" class="form-control-static" name="userId"></p>
+                    <label for="dateCreated">Date Created </label>
+                    <p ng-bind="$ctrl.invite.dateCreated" class="form-control-static" name="dateCreated"></p>
+                    <label for="dateModified">Date Modified </label>
+                    <p ng-bind="$ctrl.invite.dateModified" class="form-control-static" name="dateModified"></p>
+                    <label for="dateExpire">Expiration Date </label>
+                    <p ng-bind="$ctrl.invite.dateExpire" class="form-control-static" name="dateExpire"></p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+.mainLayout-menuItemSelect {
+    cursor: pointer;
+}
+.journalTagsDetail-tagPreview {
+    word-wrap: break-word;
+}
+.note-group-select-from-files {
+    display: none
+}
+
+/* for the error version of the gritter notice */
+.uiNotifications-error .gritter-close {
+    background: RGBA(177,48,42, .8) !important;
+}
+.uiNotifications-error .gritter-title {
+    color: #fff !important;
+}
+.uiNotifications-error .gritter-item, 
+.uiNotifications-error .gritter-bottom, 
+.uiNotifications-error .gritter-top {
+    background:	RGBA(177,48,42, .8) !important;
+    color: #fff !important;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+    background-color: #fff;
+    color: #000
+}
+
+.rdt > input{
+   border: 1px solid #ccd0d4
+}
+
+.navbar-collapse {
+    padding-right: 0px;
+}
+
+.navbar .navbar-toggler {
+    color: rgba(0, 0, 0, 0.5);
+    border: 0px;
+    position: absolute;
+    right: 0rem;
+    top: .5rem;
+}
+
+img.homepage-image-slider{
+    height: 550px;
+ position: relative;
+}
+
+.homepage-slider-header{
+    position: absolute;
+    top: 250px;
+    left: 450px;
+    z-index: 50;
+    font-weight: bold;
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 0px 0px 15px #000;
+
+}
+
+.homepage-slider-text{
+    position: absolute;
+    top: 350px;
+    left: 575px;
+    z-index: 99;
+    color: #fff;
+    text-shadow: 0px 0px 15px #000
+}
+
+@media only screen and (max-width: 500px) {
+    .homepage-slider-header{
+        position: absolute;
+        top: 150px;
+        left: 20px;
+        text-align: center
+    }
+
+
+    .homepage-slider-text {
+        position: absolute;
+        top: 350px;
+        left: 70px;
+        z-index: 99;
+        text-align: center
+    }
+}
+
+.note-toolbar {
+    text-align: center
+}
+
+button.note-btn.btn.btn-default{
+    font-size: 10px;
+    padding: 2px 2px;
+}
+
+.journalFormTransitionHidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+
+}
+
+.journalFormTransition{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.5s, opacity 0.5s linear;
+
+}
+
+/* ------------------------------------------- */
