@@ -17,7 +17,7 @@
     "angular-sanitize": "^1.6.9",
     "angular-slimscroll": "^1.0.0",
     "aws-sdk": "^2.194.0",
-    "axios": "^0.17.1",
+    "axios": "^0.19.2",
     "babel-preset-react": "^6.24.1",
     "body-parser": "~1.4.2",
     "cookie-parser": "^1.4.3",
